@@ -17,11 +17,20 @@ public class Post {
 	public Post() {
 	}
 
-	public Post(Date moment, String title, String content, Integer like) {
+	public Post(java.util.Date date, String title, String content, Integer like) {
+		this.moment = (Date) date;
+		this.title = title;
+		this.content = content;
+		this.like = like;
+	}
+
+	
+	public Post(Date moment, String title, String content, Integer like, List<Comment> comments) {
 		this.moment = moment;
 		this.title = title;
 		this.content = content;
 		this.like = like;
+		this.comments = comments;
 	}
 
 	public Date getMoment() {
