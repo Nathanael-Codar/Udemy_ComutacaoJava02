@@ -1,11 +1,16 @@
 package entities;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Post {
-	private Date moment;
+	
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+	private java.util.Date moment;
 	private String title;
 	private String content;
 	private Integer like;
@@ -17,24 +22,15 @@ public class Post {
 	public Post() {
 	}
 
-	public Post(java.util.Date date, String title, String content, Integer like) {
-		this.moment = (Date) date;
-		this.title = title;
-		this.content = content;
-		this.like = like;
-	}
-
-	
-	public Post(Date moment, String title, String content, Integer like, List<Comment> comments) {
+	public Post(java.util.Date moment, String title, String content, Integer like) {
 		this.moment = moment;
 		this.title = title;
 		this.content = content;
 		this.like = like;
-		this.comments = comments;
 	}
 
 	public Date getMoment() {
-		return moment;
+		return (Date) moment;
 	}
 
 	public void setMoment(Date moment) {
@@ -75,6 +71,20 @@ public class Post {
 
 	public void removeComment(Comment comment) {
 		comments.remove(comment);
+	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(title + "\n");
+		sb.append(like);
+		sb.append(" Likes - ");
+		sb.append(sdf.format(moment) + "\n");
+		sb.append(content + "\n");
+		sb.append("Comments:\n");
+		for (Comment c : comments) {
+			sb.append(c.getText() + "\n");
+		}
+		return sb.toString();
 	}
 	
 }
